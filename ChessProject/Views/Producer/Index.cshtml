@@ -1,0 +1,38 @@
+﻿
+@{ ViewBag.Name = "Producers";
+    bool isAdmin = User.IsInRole("Admin");}
+
+<h2>@ViewBag.Name</h2>
+
+
+<table class="table">
+    <thead>
+    <th>Name</th>
+    <th>Phone Number</th>
+    <th>Email</th>
+    @if (isAdmin == true) {
+    <th>Update</th>
+    <th>Details</th>
+    }
+    </thead>
+    <tbody>
+        @foreach (var producer in ViewBag.Producers)
+        {
+<tr>
+    <td>@producer.Name</td>
+    <td>@producer.ContactInfo.PhoneNumber</td>
+    <td>@producer.ContactInfo.Email</td>
+     @if (isAdmin == true)
+     {
+    <td>@Html.ActionLink("Update", "Edit", new { id = producer.ProducerId })</td>
+    <td>@Html.ActionLink("View More", "Details", new { id = producer.ProducerId })</td>
+     }
+</tr>
+}
+    </tbody>
+</table>
+
+<br />
+ @if (isAdmin == true) {
+@Html.ActionLink("Add producer", "New", "Producer");
+ }

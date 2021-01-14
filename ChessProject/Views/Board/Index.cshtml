@@ -1,0 +1,35 @@
+﻿
+@{ ViewBag.Name = "Boards";
+    bool isAdmin = User.IsInRole("Admin");
+}
+
+<h2>@ViewBag.Name</h2>
+
+@if (ViewBag.Boards != null)
+{
+    foreach (var board in ViewBag.Boards)
+    {
+<div class="panel panel-default">
+    <div class="panel-body">
+        @Html.Label("Name", "Name:")
+        <br />
+        <p>@board.Name</p>
+
+        @Html.Label("Owner", "Owner:")
+        <br />
+        <p>@board.Owner</p>
+
+        @using (Html.BeginForm(actionName: "Details", controllerName: "Board", method: FormMethod.Get,
+        routeValues: new { id = board.BoardId }))
+        {
+<button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Description</button>}
+    </div>
+</div>}
+            }
+
+
+<br />
+@if (isAdmin == true)
+{
+    @Html.ActionLink("Add board", "New");
+}

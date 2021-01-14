@@ -1,0 +1,49 @@
+﻿
+@{ ViewBag.Name = "Contact Info";
+    bool isAdmin = User.IsInRole("Admin"); }
+
+<h2>@ViewBag.Name</h2>
+
+<table class="table table-striped">
+    <thead>
+    <th>Email</th>
+    <th>Phone Number</th>
+    </thead>
+    <tbody>
+        @foreach (var contactInfo in ViewBag.ContactInfos)
+        {
+        <tr class=" = " table-active">
+            <td>@contactInfo.Email</td>
+            <td>@contactInfo.PhoneNumber</td>
+            @if (isAdmin == true)
+            {
+        <td>
+            @using (Html.BeginForm(actionName: "Delete", controllerName: "ContactInfo", method: FormMethod.Post,
+         routeValues: new { id = contactInfo.ContactInfoId }))
+            {
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button type="submit" class="btn btn-danger">Remove</button>}
+        </td>
+
+        <td>
+            @using (Html.BeginForm(actionName: "Edit", controllerName: "ContactInfo", method: FormMethod.Get,
+routeValues: new { id = contactInfo.ContactInfoId }))
+            {
+        <button type="submit" class="btn btn-primary">Update</button>}
+        </td>
+                            }
+        </tr>}
+    </tbody>
+    @if (isAdmin == true)
+    {
+<div class="alert alert-danger">
+    <strong>Atentie!</strong> Nu puteti sterge un contact daca acesta este asociat unui producator.
+</div>
+    }
+</table>
+<br />
+
+@if (isAdmin == true)
+{
+    @Html.ActionLink("Add contact", "New");
+}

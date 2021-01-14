@@ -1,0 +1,34 @@
+﻿@model ChessProject.Models.Producer
+@{
+    ViewBag.Name = "Update Producer";
+}
+
+<h2>@ViewBag.Name</h2>
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Producer",  method: FormMethod.Post))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.HiddenFor(b => b.ProducerId)
+  
+
+    @Html.LabelFor(b => b.Name, "Name:")
+    <br />
+    @Html.EditorFor(b => b.Name, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(b => b.Name, "", new { @class = "text-danger" })
+    <br /><br />
+
+
+        @Html.LabelFor(b => b.ContactInfo.Email, "Email:")
+    <br />
+    @Html.EditorFor(b => b.ContactInfo.Email, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(b => b.ContactInfo.Email, "", new { @class = "text-danger" })
+    <br /><br />
+
+            @Html.LabelFor(b => b.ContactInfo.PhoneNumber, "Phone Number:")
+    <br />
+    @Html.EditorFor(b => b.ContactInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(b => b.ContactInfo.PhoneNumber, "", new { @class = "text-danger" })
+    <br /><br />
+
+    <button class="btn btn-primary" type="submit">Update</button>
+}

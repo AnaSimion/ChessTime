@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    ViewBag.Message = "You can find us here";
+}
+
+<div class="row">
+    <br /><br /><br />
+    <div class="col-md-4">
+        <h2>@ViewBag.Title</h2>
+        <h3>@ViewBag.Message</h3>
+        <address>
+            Bucharest<br />
+            Steet Academiei 14, 010014<br />
+            <abbr title="Phone">P:</abbr>
+            0721257896
+        </address>
+
+        <address>
+            <strong>Support:</strong>   <a href="mailto:Support@ChessTime.com">Support@ChessTime.com</a><br />
+            <strong>Marketing:</strong> <a href="mailto:Marketing@ChessTime.com">Marketing@ChessTime.com</a>
+        </address>
+
+        <address>
+            <b>Working Program:</b>
+            <br /><br />
+            <strong>Monday-Saturday:</strong>   <p>9:00-18:00</p><br />
+            <strong>Sunday:</strong>   <p>Closed</p><br />
+
+        </address>
+    </div>
+    <div class="col-md-4">
+        <div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=university%20of%20mathemathics%20and%20informatics%20bucharest&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div>
+        <style>
+
+            .gmap_canvas {
+                height: 500px;
+                width: 600px;
+            }
+        </style>
+    </div>
+</div>

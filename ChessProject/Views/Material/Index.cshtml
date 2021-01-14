@@ -1,0 +1,42 @@
+﻿
+@{ ViewBag.Name = "Material";
+    bool isAdmin = User.IsInRole("Admin");}
+
+<h2>@ViewBag.Name</h2>
+
+<table class="table">
+    <thead>
+    <th>Name</th>
+    @if (isAdmin == true)
+    {
+    <th>Update/Remove</th>
+    }
+    </thead>
+    <tbody>
+        @foreach (var material in ViewBag.Materials)
+        {
+        <tr>
+            <td>@material.Name</td>
+            @if (isAdmin == true)
+            {
+        <td>
+            @using (Html.BeginForm(actionName: "Edit", controllerName: "Material", method: FormMethod.Get,
+                    routeValues: new { id = material.MaterialId }))
+            {
+        <button type="submit" class="btn btn-link col-lg-3">Update</button>}
+
+            @using (Html.BeginForm(actionName: "Delete", controllerName: "Material", method: FormMethod.Post,
+                    routeValues: new { id = material.MaterialId }))
+            {
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button type="submit" class="btn btn-link col-lg-3">Remove</button>}
+        </td>
+            }
+                        </tr>
+}
+    </tbody>
+</table>
+<br />
+
+@if (isAdmin == true) {
+@Html.ActionLink("Add Material", "New")}

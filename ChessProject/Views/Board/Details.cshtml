@@ -1,0 +1,80 @@
+﻿@model ChessProject.Models.Board
+
+@{ ViewBag.Name = "Details";
+    bool isAdmin = User.IsInRole("Admin");
+}
+
+<h2>@Model.Name</h2>
+
+@Html.Label("Owner", "Owner:")
+<br />
+<p>@Model.Owner</p>
+
+
+@if (Model.Producer != null)
+{
+@Html.Label("Producer", "Producer:")
+                <br />
+                                <p>@Model.Producer.Name</p>
+
+                                                @Html.Label("Producer", "ContactInfo:")
+                                                                <br />
+                                                                                <p>@Model.Producer.ContactInfo.PhoneNumber</p>}
+
+
+@if (Model.Price != 0)
+{
+@Html.LabelFor(b => b.Price, "Price:")
+                <p>@Model.Price</p>}
+
+@if (Model.Year != null)
+{
+@Html.LabelFor(b => b.Year, "Year:")
+                <p>@Model.Year</p>}
+
+@Html.Label("Description", "Description:")
+<br />
+<div class="panel-body">
+    @if (Model.Description.IsEmpty())
+    {
+<p>This board has no description to print.</p> }
+            else
+            {
+<p>@Model.Description</p>}
+</div>
+
+@if (Model.Materials.Count > 0)
+{
+@Html.Label("Materials", "Materials:")
+                <br />
+                                <ul>
+                                    @foreach (var material in Model.Materials)
+                                    {
+                    <li>@material.Name</li>}
+                                </ul>}
+
+@if (Model.BoardType != null)
+{
+@Html.Label("BoardType", "Board Type:")
+                <br />
+                                @Html.DisplayFor(b => b.BoardType.Name)
+                                                <br />
+                                                                <br />}
+
+
+@if (isAdmin == true)
+{
+
+
+using (Html.BeginForm(actionName: "Edit", controllerName: "Board", method: FormMethod.Get, routeValues: new { id = Model.BoardId }))
+{
+<button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Update</button>}
+
+using (Html.BeginForm(actionName: "Delete", controllerName: "Board", method: FormMethod.Post, routeValues: new { id = Model.BoardId }))
+{
+@Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Delete</button>}
+<br />
+
+
+}

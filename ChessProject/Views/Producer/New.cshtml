@@ -1,0 +1,34 @@
+﻿@model ChessProject.Models.ProducerContactViewModel
+@{
+    ViewBag.Name = "New";
+}
+
+<h2>@ViewBag.Name</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Producer", method: FormMethod.Post))
+{
+    @Html.Label("Name", "Name:")
+    <br />
+    @Html.TextBoxFor(p => p.Name, null, new { placeholder = "Type in the producer's name", @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.Name, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.LabelFor(p => p.PhoneNumber, "Phone number:")
+    <br />
+    @Html.TextBoxFor(p => p.PhoneNumber, null, new { placeholder = "Type in the phone number", @class = "form-control" })
+    @Html.ValidationMessageFor(p => p.PhoneNumber, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.LabelFor(p => p.Email, "Email:")
+    <br />
+    @Html.TextBoxFor(p => p.Email, null, new { placeholder = "Email", @class = "form-control", @style = "margin-bottom:3px" })
+    @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
+
+
+
+
+    <br />
+    <br />
+
+    <button class="btn btn-primary" type="submit">Create</button>
+}

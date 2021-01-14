@@ -1,0 +1,17 @@
+﻿@model ChessProject.Models.BoardType
+@{
+    ViewBag.Name = "Create a board type";
+}
+
+<h2>@ViewBag.Name</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "BoardType", method: FormMethod.Post))
+{
+    @Html.LabelFor(bt => bt.Name, "Name:")
+    <br />
+    @Html.TextBoxFor(bt => bt.Name, null, new { placeholder = "Type in the board type's name", @class = "form-control" })
+    @Html.ValidationMessageFor(bt => bt.Name, "", new { @class = "text-danger" })
+    <br /><br />
+
+    <button class="btn btn-primary" type="submit">Create</button>
+}

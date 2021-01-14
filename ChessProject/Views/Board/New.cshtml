@@ -1,0 +1,68 @@
+﻿@model ChessProject.Models.Board
+@{
+    ViewBag.Name = "Create";
+}
+
+<h2>@ViewBag.Name</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Board", method: FormMethod.Post))
+{
+    @Html.Label("Name", "Name:")
+    <br />
+    @Html.TextBoxFor(b => b.Name, null, new { placeholder = "Type in the board's title", @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.Name, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Owner", "Owner:")
+    <br />
+    @Html.TextBoxFor(b => b.Owner, null, new { placeholder = "Type in the board's owner", @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.Owner, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Price", "Price:")
+    <br />
+    @Html.TextBoxFor(b => b.Price, null, new { placeholder = "Type in the board's number of pages", @class = "form-control", @type = "number" })
+    @Html.ValidationMessageFor(b => b.Price, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Year", "Year:")
+    <br />
+    @Html.TextBoxFor(b => b.Year, null, new { placeholder = "Type in the board's year of fabrication", @class = "form-control", @type = "number" })
+    @Html.ValidationMessageFor(b => b.Year, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Description", "Description:")
+    <br />
+    @Html.TextArea("Description", null, new { placeholder = "Type in the board's description", @class = "form-control", @rows = "10" })
+    @Html.ValidationMessageFor(b => b.Description, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("BoardType", "BoardType:")
+    <br />
+    @Html.DropDownListFor(b => b.BoardTypeId, new SelectList(Model.BoardTypeList, "Value", "Text"), "Choose a board type", new { @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.BoardTypeId, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.Label("Producer", "Producer:")
+    <br />
+    @Html.DropDownListFor(b => b.ProducerId, new SelectList(Model.ProducerList, "Value", "Text"), "Choose a producer", new { @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.ProducerId, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.LabelFor(b => b.MaterialsList, "Choose materials:")
+    <br />
+    for (int i = 0; i < Model.MaterialsList.Count(); i++)
+    {
+        @Html.HiddenFor(b => b.MaterialsList[i].Id)
+        @Html.HiddenFor(b => b.MaterialsList[i].Name)
+        @Html.CheckBoxFor(b => b.MaterialsList[i].Checked)
+        @Html.DisplayFor(b => b.MaterialsList[i].Name)
+        <br />
+    }
+
+    <br />
+    <button class="btn btn-primary" type="submit">Create</button>
+}
+
